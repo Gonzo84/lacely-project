@@ -20,6 +20,7 @@
         transform: translate(-50%, 0);
         height: 10rem;
         margin-bottom: 5rem;
+        cursor: pointer;
 
         @media screen and (max-width: 768px) {
             position: initial;
