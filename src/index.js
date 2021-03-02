@@ -1,34 +1,16 @@
 // import slick carousel
 import 'slick-carousel';
+
 // site config
 let headerHeight = 140;
 let headerHeightOnClickNavigation = 80;
 let lAnimationDuration = 500;
 let animationFlagClsRationPerSection = 1.3;
+let twentyNumber = 0;
+let eightyNumber = 0;
 
+// hero section height
 const heroSectionHeight = $('.section.hero').height() - headerHeight;
-const circleZeroToTwenty = document.getElementById('zero-to-twenty')
-const twentyPercent = document.getElementById('twenty-percent');
-const eightyPercent = document.getElementById('eighty-percent');
-let alreadyAnimated = false;
-
-// helper function for animating specific value from to or adding classes
-function animateValue(obj, start, end, duration, percentage = false) {
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    if (percentage) {
-      obj.classList.add(`p${Math.floor(progress * (end - start) + start)}`)
-    } else {
-      obj.innerHTML = Math.floor(progress * (end - start) + start);
-    }
-    if (progress < 1) {
-      window.requestAnimationFrame(step);
-    }
-  };
-  window.requestAnimationFrame(step);
-}
 
 // function responsible for flagging if element(section) is in view
 const isFullySeen = el =>
@@ -36,22 +18,23 @@ const isFullySeen = el =>
   && el.getBoundingClientRect()['top'] +
   window.scrollY + (window.innerHeight / animationFlagClsRationPerSection - headerHeight) <= window.innerHeight + window.scrollY;
 
-$(document).ready(function() {
+// on page ready
+$(document).ready(function () {
+
   // initializing slider
-  $('.slider').slick({dots: true,});
+  $('.slider').slick({ dots: true });
 
   // scrolling entire page to top on page load
-  $('html, body').animate({scrollTop: $('#hero').offset().top}, lAnimationDuration);
-  setTimeout(function() {
-    $('#hero').addClass('in-view');
-  }, lAnimationDuration);
+  $('html, body').animate({ scrollTop: $('#hero').offset().top }, lAnimationDuration);
+  setTimeout(function () { $('#hero').addClass('in-view'); }, lAnimationDuration);
 
-  $(window).scroll(function() {
+  // on window scroll
+  $(window).scroll(function () {
     const windscroll = $(window).scrollTop();
 
     // setting active cls on header nav items while scrolling
     if (windscroll >= (headerHeight * 2)) {
-      $('.section:not(.vision)').each(function(i) {
+      $('.section:not(.vision)').each(function (i) {
         if ($(this).position().top <= windscroll + headerHeight) {
           $('.nav-item:not(.sidemenu-list-item).active').removeClass('active');
           $('.nav-item:not(.sidemenu-list-item)').eq(i).addClass('active');
@@ -60,7 +43,7 @@ $(document).ready(function() {
     }
 
     // setting css classes to header and sections that inform them that header height is reduced or not
-    if (windscroll >= heroSectionHeight) {
+    if(windscroll >= heroSectionHeight) {
       headerHeight = headerHeightOnClickNavigation;
       $('.header').addClass('header-reduced');
       $('.section').addClass('header-reduced');
@@ -78,19 +61,36 @@ $(document).ready(function() {
         $(this).addClass('in-view');
       }
 
-      if (isFullySeen(this) && $(this).hasClass('vision')) {
-        if (!alreadyAnimated) {
-          animateValue(circleZeroToTwenty, 0, 20, 2000, true);
-          animateValue(twentyPercent, 0, 20, 2000);
-          animateValue(eightyPercent, 0, 80, 2000);
-          alreadyAnimated = true;
-        }
+      // scrolling to the VISION section result in triggering animation
+      if(isFullySeen(this) === true && $(this).hasClass('vision')) {
+        setTimeout(function () {
+          let myInterval = setInterval(function () {
+            if (twentyNumber < 20) {
+              twentyNumber += 1;
+              $('.c100').addClass(`p${twentyNumber}`);
+              $('#twenty-percent').text(`${twentyNumber}`)
+            } else {
+              clearInterval(myInterval);
+            }
+          }, 150);
+        },2000);
+
+        setTimeout(function () {
+          let myInterval2 = setInterval(function () {
+            if (eightyNumber < 80) {
+              eightyNumber += 1;
+              $('#eighty-percent').text(`${eightyNumber}`)
+            } else {
+              clearInterval(myInterval2);
+            }
+          }, 150);
+        }, 2000);
       }
     });
   });
 
   // code responsible for navigation clicks
-  $('.nav-item').click(function(e) {
+  $('.nav-item').click(function (e) {
     e.preventDefault();
     $(this).siblings().removeClass('active');
     $(this).addClass('active');
@@ -99,57 +99,43 @@ $(document).ready(function() {
 
     if ($(this).hasClass('was-wir-tun')) {
       $('html, body').animate({scrollTop: $('#was-wir-tun').offset().top - headerHeightOnClickNavigation}, lAnimationDuration);
-      setTimeout(() => {
-        $('#was-wir-tun').addClass('in-view');
-      }, lAnimationDuration);
+      setTimeout( () => {$('#was-wir-tun').addClass('in-view');}, lAnimationDuration);
     }
     if ($(this).hasClass('markenidee')) {
       $('html, body').animate({scrollTop: $('#markenidee').offset().top - headerHeightOnClickNavigation}, lAnimationDuration);
-      setTimeout(() => {
-        $('#markenidee').addClass('in-view');
-      }, lAnimationDuration);
+      setTimeout(() => {$('#markenidee').addClass('in-view');}, lAnimationDuration);
     }
     if ($(this).hasClass('produkte')) {
       $('html, body').animate({scrollTop: $('#produkte').offset().top - headerHeightOnClickNavigation}, lAnimationDuration);
-      setTimeout(() => {
-        $('#produkte').addClass('in-view');
-      }, lAnimationDuration);
+      setTimeout(() => {$('#produkte').addClass('in-view');}, lAnimationDuration);
     }
     if ($(this).hasClass('mission')) {
       $('html, body').animate({scrollTop: $('#mission').offset().top - headerHeightOnClickNavigation}, lAnimationDuration);
-      setTimeout(() => {
-        $('#mission').addClass('in-view');
-      }, lAnimationDuration);
+      setTimeout(() => {$('#mission').addClass('in-view');}, lAnimationDuration);
     }
     if ($(this).hasClass('hintergrund')) {
       $('html, body').animate({scrollTop: $('#hintergrund').offset().top - headerHeightOnClickNavigation}, lAnimationDuration);
-      setTimeout(() => {
-        $('#hintergrund').addClass('in-view');
-      }, lAnimationDuration);
+      setTimeout(() => {$('#hintergrund').addClass('in-view');}, lAnimationDuration);
     }
     if ($(this).hasClass('wertschopfung')) {
       $('html, body').animate({scrollTop: $('#wertschopfung').offset().top - headerHeightOnClickNavigation}, lAnimationDuration);
-      setTimeout(() => {
-        $('#wertschopfung').addClass('in-view');
-      }, lAnimationDuration);
+      setTimeout(() => {$('#wertschopfung').addClass('in-view');}, lAnimationDuration);
     }
     if ($(this).hasClass('kontakt')) {
       $('html, body').animate({scrollTop: $('#kontakt').offset().top - headerHeightOnClickNavigation}, lAnimationDuration);
-      setTimeout(() => {
-        $('#kontakt').addClass('in-view');
-      }, lAnimationDuration);
+      setTimeout(() => {$('#kontakt').addClass('in-view');}, lAnimationDuration);
     }
   });
 
   // get start button listener
-  $('.get-started').click(function() {
+  $('.get-started').click(function () {
     $('.nav-item.hero').removeClass('active');
     $('.nav-item.was-wir-tun').addClass('active');
     $('html, body').animate({scrollTop: $('#was-wir-tun').offset().top - headerHeightOnClickNavigation}, lAnimationDuration);
   });
 
   /// hamburger fancier menu click handler
-  $('.navi-trigger').click(function() {
+  $('.navi-trigger').click(function () {
     if ($(this).hasClass('cross')) {
       $(this).removeClass('cross');
       $('.sidemenu-wrap').removeClass('shown');
@@ -160,7 +146,7 @@ $(document).ready(function() {
   });
 
   /// scroll to top of the page
-  $('#to-top').on('click', function() {
+  $('#to-top').on('click', function () {
     $('html, body').animate({scrollTop: $('#hero').offset().top}, lAnimationDuration);
   });
 });
