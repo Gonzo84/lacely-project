@@ -1,12 +1,12 @@
 .header {
-    background-color: rgba($white, .9);
+    background-color: rgba($white, .7);
     position: fixed;
     width: 100%;
     z-index: 10;
     left: 0;
     top: 0;
     height: $header-height;
-    transition: all 200ms ease-in-out;
+    transition: all $animation-duration $animation-type;
 
     @media screen and (max-width: 768px) {
         height: $header-reduced-height;
@@ -16,7 +16,7 @@
         height: $header-reduced-height;
 
         .logo {
-            transition: all 200ms ease-in-out;
+            transition: all $animation-duration $animation-type;
             height: $header-reduced-height - 2rem;
         }
 
@@ -61,7 +61,7 @@
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
-        transition: all 200ms ease-in-out;
+        transition: all $animation-duration $animation-type;
         height: $header-height;
         display: inline-flex;
         justify-content: center;
