@@ -276,11 +276,11 @@
     .right,
     .left {
 
-        h3 {
-            @media screen and (max-width: 615px) {
-                word-break: break-all;
-            }
-        }
+         h3 {
+             @media screen and (max-width: 615px) {
+                 word-break: break-all;
+             }
+         }
     }
 
     .right {

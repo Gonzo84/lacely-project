@@ -52,7 +52,7 @@
             flex-direction: column;
             align-items: center;
         }
-
+        
         @media screen and (max-width: #{$mobile-only}) {
             display: none;
         }
