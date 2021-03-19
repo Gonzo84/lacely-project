@@ -10,15 +10,16 @@
 @import "sass/shared/animations";
 @import "sass/shared/icons";
 @import "sass/shared/shared";
-@import "sass/shared/circle";
+@import "../../lacely-project/src/sass/shared/circle";
 
 @import "sass/layout/header/header";
 @import "sass/layout/main/main";
 
 @import "sass/components/nav";
 @import "sass/components/secondary-hambuerger";
-@import "sass/components/sidemenu";
+@import "../../lacely-project/src/sass/components/sidemenu";
 @import "sass/components/btn";
+@import "../../lacely-project/src/sass/components/dialog";
 
 @import "sass/sections/hero";
 @import "sass/sections/was-wir-tun";
@@ -28,8 +29,8 @@
 @import "sass/sections/vision";
 @import "sass/sections/hintergrund";
 @import "sass/sections/wertschopfung";
-@import "sass/sections//wir.scss";
-@import "sass/sections/kontakt";
+@import "../../lacely-project/src/sass/sections/wir";
+@import "../../lacely-project/src/sass/sections/kontakt";
 
 @import "sass/slick.css";
 @import "sass/slick-theme.css";
