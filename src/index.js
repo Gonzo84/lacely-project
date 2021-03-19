@@ -16,7 +16,6 @@ const isFullySeen = el =>
     && el.getBoundingClientRect()['top'] +
     window.scrollY + (window.innerHeight / animationFlagClsRationPerSection - headerHeight) <= window.innerHeight + window.scrollY;
 
-dialogOpened = $('#dialog').dialog('isOpen') === true;
 
 // on page ready
 $(document).ready(function () {
@@ -153,7 +152,7 @@ $(document).ready(function () {
     /// handling removed scroll on html when side menu is opened and appears below 1024px
     /// basicly just remove cls which is glued when user clicks to open side menu, side menu stays opened, and than go back to desktop size
     const checkPosition = () => {
-        if (window.matchMedia('(min-width: 1024px)').matches && !$('#dialog').dialog("isOpen")) {
+        if (window.matchMedia('(min-width: 1024px)').matches && !dialogOpened) {
             $('html').removeClass('no-scroll-y');
             $('.navi-trigger').removeClass('cross');
             $('.sidemenu-wrap').removeClass('shown');
@@ -185,6 +184,7 @@ $(document).ready(function () {
     // on click show dialog
     $('.impressumDaten').on('click', function () {
         $('html').addClass('no-scroll-y');
+        dialogOpened = true;
         $('#modal-wrapper').show();
         $('#dialog').dialog({
             draggable: false,
@@ -192,6 +192,7 @@ $(document).ready(function () {
             appendTo: "#modal-wrapper",
             // on close remove no-scroll class
             close: function () {
+                dialogOpened = false;
                 $('html').removeClass('no-scroll-y');
                 $('#modal-wrapper').hide();
             }
@@ -199,6 +200,7 @@ $(document).ready(function () {
     });
     $('#modal-wrapper').on('click', function (event) {
         if (event.target.id === 'modal-wrapper') {
+            dialogOpened = false;
             $('html').removeClass('no-scroll-y');
             $('#modal-wrapper').hide();
         }
