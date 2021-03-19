@@ -197,6 +197,12 @@ $(document).ready(function () {
             }
         });
     });
+    $('#modal-wrapper').on('click', function (event) {
+        if (event.target.id === 'modal-wrapper') {
+            $('html').removeClass('no-scroll-y');
+            $('#modal-wrapper').hide();
+        }
+    });
 
 
 });
