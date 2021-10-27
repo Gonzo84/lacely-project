@@ -127,6 +127,10 @@ $(document).ready(function () {
             $('html, body').animate({scrollTop: Math.round($('#kontakt').offset().top - headerHeightOnClickNavigation + 1)}, lAnimationDuration); // fix for not setting active cls on kontakt nav item
             setTimeout(() => {$('#kontakt').addClass('in-view');}, lAnimationDuration);
         }
+        if ($(this).hasClass('faq')) {
+            $('html, body').animate({scrollTop: Math.round($('#faq').offset().top - headerHeightOnClickNavigation + 1)}, lAnimationDuration); // fix for not setting active cls on faq nav item
+            setTimeout(() => {$('#faq').addClass('in-view');}, lAnimationDuration);
+        }
     });
 
     // get start button listener
@@ -205,6 +209,24 @@ $(document).ready(function () {
             $('#modal-wrapper').hide();
         }
     });
+    const faq = document.getElementsByClassName("faq-page");
+    let i;
+
+    for (i = 0; i < faq.length; i++) {
+        faq[i].addEventListener("click", function () {
+            /* Toggle between adding and removing the "active" class,
+            to highlight the button that controls the panel */
+            this.classList.toggle("active");
+
+            /* Toggle between hiding and showing the active panel */
+            var body = this.nextElementSibling;
+            if (body.style.display === "block") {
+                body.style.display = "none";
+            } else {
+                body.style.display = "block";
+            }
+        });
+    }
 
 
 });
