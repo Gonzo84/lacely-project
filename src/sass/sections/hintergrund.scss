@@ -135,19 +135,19 @@
         }
 
         &.first {
-            color: $accent-light;
+            color: #64A4B5;
 
             .circle-picture {
-                background-image: url("#{$img-path}hintergrund/circle-green.png");
+                background-image: url("#{$img-path}hintergrund/circle-blue.png");
             }
 
         }
 
         &.second {
-            color: #64A4B5;
+            color: $accent-light;
 
             .circle-picture {
-                background-image: url("#{$img-path}hintergrund/circle-blue.png");
+                background-image: url("#{$img-path}hintergrund/circle-green.png");
             }
         }
 
